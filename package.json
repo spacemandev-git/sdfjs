@@ -1,0 +1,16 @@
+{
+  "name": "sdfjs",
+  "version": "0.1.0",
+  "description": "A javascript library to help read zip files in Standard Deck Format (SDF)",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify index.ts --s sdf -p [ tsify --noImplicitAny ] > sdf.js"
+  },
+  "author": "spacemandev",
+  "license": "GPLv3",
+  "dependencies": {
+    "browserify": "^16.5.1",
+    "tsify": "^4.0.1",
+    "typescript": "^3.8.3"
+  }
+}
