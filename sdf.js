@@ -53,13 +53,13 @@ exports.handleFiles = handleFiles;
  */
 function readDeck(deckfile) {
     return __awaiter(this, void 0, void 0, function () {
-        var deckzip, deckyaml, _a, _b, _c;
+        var deckzip, deckyaml, _a, _b, assetURIMap_1, _c;
+        var _this = this;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0: return [4 /*yield*/, jszip.loadAsync(deckfile)];
                 case 1:
                     deckzip = _d.sent();
-                    console.log(deckzip);
                     _d.label = 2;
                 case 2:
                     _d.trys.push([2, 4, , 5]);
@@ -67,10 +67,28 @@ function readDeck(deckfile) {
                     return [4 /*yield*/, deckzip.file('deck.yaml').async("text")];
                 case 3:
                     deckyaml = _b.apply(_a, [_d.sent()]);
-                    console.log(deckyaml);
+                    assetURIMap_1 = {} //assetname (including the filetype ('.png'))
+                    ;
+                    deckzip.folder('assets').forEach(function (file) { return __awaiter(_this, void 0, void 0, function () {
+                        var newUrl, _a, _b;
+                        return __generator(this, function (_c) {
+                            switch (_c.label) {
+                                case 0:
+                                    _b = (_a = URL).createObjectURL;
+                                    return [4 /*yield*/, deckzip.file("assets/" + file).async('blob')];
+                                case 1:
+                                    newUrl = _b.apply(_a, [_c.sent()]);
+                                    console.log(newUrl);
+                                    assetURIMap_1[file] = newUrl;
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); });
+                    console.log(assetURIMap_1);
                     return [3 /*break*/, 5];
                 case 4:
                     _c = _d.sent();
+                    console.log("Zip File doesn't match SDF Schema");
                     return [3 /*break*/, 5];
                 case 5: return [2 /*return*/];
             }
@@ -78,10 +96,6 @@ function readDeck(deckfile) {
     });
 }
 exports.readDeck = readDeck;
-// Read the Deck Yaml
-// Read the Assets/ and Create Object URLS for them
-// Read the Cards and add them card list, replace assets with asset urls
-// Create a function to return the HTML of a given card from a deck
 
 },{"js-yaml":12,"jszip":51}],2:[function(require,module,exports){
 'use strict'
