@@ -10,7 +10,7 @@
   "license": "GPLv3",
   "dependencies": {
     "browserify": "^16.5.1",
-    "handlebars": "^4.7.6",
+    "handlebars": "^4.7.7",
     "js-yaml": "^3.13.1",
     "jszip": "^3.4.0",
     "tsify": "^4.0.1",
